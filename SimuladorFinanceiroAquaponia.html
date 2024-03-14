@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de Rendimentos Aquaponia</title>
+</head>
+
+<body>
+    <h1>Calcule seus rendimentos na aquaponia.</h1>
+    <h3>Insira as informações:</h3>
+    Quantidade de mudas produzidas:
+    <br>
+    <br>
+    <input type="number" id="inpQtdplantas"><br>
+    <br>
+    Preço de venda por muda: <br>
+    <br>
+    <input type="number" id="inpPlantapreco">
+    <br>
+    <br>
+    Kg de peixe(sujo):
+    <br>
+    <br>
+    <input type="number" id="inpKgpeixe">
+    <br>
+    <br>
+    Gasto em ração: <br>
+    <br>
+    <input type="number" id="inpRacao"><br>
+    <br>
+    Qual foi seu consumo de água?(em m³)
+    <br>
+    <br>
+    <input type="number" id="inpAgua"><br>
+    <br>
+    Preço do m³: <br>
+    <br>
+    <input type="number" id="inpAguapreco"><br>
+    <br>
+    <button onclick="calcular()">Calcular</button>
+    <div style="width: 400px;" id="divMsg"></div>
+
+
+
+
+
+
+
+</body>
+
+</html>
+
+<script>
+    //calcular as quantidades produzidas, preço médio de venda e custo de produção para obter o lucro ao final.
+    function calcular() {
+
+        var qtdplantas = Number(inpQtdplantas.value);
+        var plantapreco = Number(inpPlantapreco.value);
+        var totalplantas = qtdplantas * plantapreco;
+
+        var kgpeixe = Number(inpKgpeixe.value);
+        var filekg = kgpeixe * 0.3;
+        var totalfile = filekg * 40;
+        var gastoracao = Number(inpRacao.value);
+
+        var consagua = Number(inpAgua.value);
+        var precoagua = Number(inpAguapreco.value);
+        var gastoagua = consagua * precoagua;
+
+        var gastototal = gastoagua + gastoracao;
+
+        var fattotal = totalfile + totalplantas;
+
+        var perdalucro = fattotal - gastototal;
+
+        divMsg.innerHTML = `<span style="width: fit-content;">
+        Você produziu ${qtdplantas} mudas totalizando R$${totalplantas} de 
+         faturamento bruto da venda das plantas, 
+         ${kgpeixe} kg de peixe, ${filekg}kg de filé (contando com aproveitamento médio de 30%),
+         com preço médio de venda de R$40,00 por kg de filé
+         totalizando R$${totalfile} de faturamento bruto de peixes
+         gastou R$${gastoracao} de ração e ${consagua} m³ de água, totalizando R$${gastototal}
+         de gastos, R$${fattotal} de faturamento bruto e R$${perdalucro} de lucro.</span>`
+
+        if (perdalucro < 0) {
+            divMsg.innerHTML = `<span style="width: fit-content;">
+        Você produziu ${qtdplantas} mudas totalizando R$${totalplantas} de 
+         faturamento bruto da venda das plantas, 
+         ${kgpeixe} kg de peixe, ${filekg}kg de filé (contando com aproveitamento médio de 30%),
+         com preço médio de venda de R$40,00 por kg de filé
+         totalizando R$${totalfile} de faturamento bruto de peixes
+         gastou R$${gastoracao} de ração e ${consagua} m³ de água, totalizando R$${gastototal}
+         de gastos, R$${fattotal} de faturamento bruto e R$${perdalucro} de prejuízo. Precisamos rever os gastos!!</span>`
+        }
+
+    }
+
+
+
+
+</script>
